@@ -31,7 +31,6 @@ export function WildlifeObservationLog() {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [selectedObservation, setSelectedObservation] =
     useState<Observation | null>(null);
-  const [isEditMode, setIsEditMode] = useState(false);
   const [deletedObservation, setDeletedObservation] =
     useState<Observation | null>(null);
 
@@ -86,7 +85,6 @@ export function WildlifeObservationLog() {
     setIsAddModalOpen(false);
     setIsDetailModalOpen(false);
     setSelectedObservation(null);
-    setIsEditMode(false);
 
     toast.success("Observation updated", {
       description: `${updatedObservation.species} sighting has been updated.`,
@@ -144,14 +142,11 @@ export function WildlifeObservationLog() {
   const openDetailModal = (observation: Observation) => {
     setSelectedObservation(observation);
     setIsDetailModalOpen(true);
-    setIsEditMode(false);
   };
 
   const startEditObservation = (observation: Observation) => {
     setSelectedObservation(observation);
-    setIsEditMode(true);
     setIsDetailModalOpen(false);
-    setIsAddModalOpen(true);
   };
 
   const handleImport = (importedObservations: Observation[]) => {
@@ -313,22 +308,13 @@ export function WildlifeObservationLog() {
         <ObservationChart observations={observations} />
       </TabsContent>
 
-      {/* Add/Edit Modal */}
-      <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
-        <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>
-              {isEditMode ? "Edit Observation" : "Add New Observation"}
-            </DialogTitle>
-          </DialogHeader>
-          <ObservationForm
-            onSubmit={isEditMode ? updateObservation : addObservation}
-            initialData={isEditMode ? selectedObservation : undefined}
-            onCancel={() => setIsAddModalOpen(false)}
-            existingSpecies={uniqueSpecies}
-          />
-        </DialogContent>
-      </Dialog>
+      <ObservationForm
+        open={isAddModalOpen}
+        onAdd={addObservation}
+        onCancel={() => setIsAddModalOpen(false)}
+        onEdit={updateObservation}
+        existingSpecies={uniqueSpecies}
+      />
 
       {/* Detail Modal */}
       <Dialog open={isDetailModalOpen} onOpenChange={setIsDetailModalOpen}>
