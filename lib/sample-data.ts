@@ -1,19 +1,25 @@
-import type { Observation } from "./types"
+import type { Observation } from "./types";
 
 // Helper function to generate a random date within a month
 function randomDateInMonth(year: number, month: number) {
-  const daysInMonth = new Date(year, month + 1, 0).getDate()
-  const day = Math.floor(Math.random() * daysInMonth) + 1
-  return new Date(year, month, day)
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const day = Math.floor(Math.random() * daysInMonth) + 1;
+  return new Date(year, month, day);
 }
 
 // Helper function to generate a random number between min and max
 function randomBetween(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 export function generateSampleData(): Observation[] {
-  const species = ["Red Fox", "Great Blue Heron", "Bald Eagle", "Raccoon", "Coyote"]
+  const species = [
+    "Red Fox",
+    "Great Blue Heron",
+    "Bald Eagle",
+    "Raccoon",
+    "Coyote",
+  ] as const;
   const locations = [
     "Woodland Park, 47.6688, -122.3463",
     "Lake Washington, 47.6097, -122.2559",
@@ -29,7 +35,7 @@ export function generateSampleData(): Observation[] {
     "Lincoln Park, 47.5305, -122.3961",
     "Volunteer Park, 47.6301, -122.3158",
     "Interlaken Park, 47.6342, -122.3073",
-  ]
+  ];
 
   const foxNotes = [
     "Spotted at dawn, hunting near the edge of the forest.",
@@ -43,7 +49,7 @@ export function generateSampleData(): Observation[] {
     "Hunting near Japanese Garden.",
     "Beautiful winter coat, hunting at dusk.",
     "Pouncing on prey beneath snow.",
-  ]
+  ];
 
   const heronNotes = [
     "Standing in shallow water, very still, waiting for fish.",
@@ -56,7 +62,7 @@ export function generateSampleData(): Observation[] {
     "Preening feathers on log.",
     "Hunting in tidal pools at low tide.",
     "Stoic in light snowfall, still fishing.",
-  ]
+  ];
 
   const eagleNotes = [
     "Perched on a tall Douglas fir, scanning the water.",
@@ -69,7 +75,7 @@ export function generateSampleData(): Observation[] {
     "Harassing osprey to steal fish.",
     "Pair calling to each other across the bay.",
     "Soaring over snow-covered landscape.",
-  ]
+  ];
 
   const raccoonNotes = [
     "Family of raccoons foraging near the water's edge at dusk.",
@@ -82,7 +88,7 @@ export function generateSampleData(): Observation[] {
     "Preparing winter den in hollow tree.",
     "Tracks in fresh snow leading to den.",
     "Mother with young kits exploring near the conservatory.",
-  ]
+  ];
 
   const coyoteNotes = [
     "Lone coyote trotting along a trail in the early morning.",
@@ -94,7 +100,7 @@ export function generateSampleData(): Observation[] {
     "Pack of four moving through forest edge.",
     "Lone individual with thick winter coat.",
     "Howling in moonlight on winter solstice.",
-  ]
+  ];
 
   const speciesNotes = {
     "Red Fox": foxNotes,
@@ -102,48 +108,48 @@ export function generateSampleData(): Observation[] {
     "Bald Eagle": eagleNotes,
     Raccoon: raccoonNotes,
     Coyote: coyoteNotes,
-  }
+  };
 
-  const observations: Observation[] = []
-  let id = 1
+  const observations: Observation[] = [];
+  let id = 1;
 
   // Generate observations for each month with varying frequencies and multiple sightings per species
   for (let month = 0; month < 12; month++) {
     // For each species, generate multiple observations for this month
     species.forEach((speciesName) => {
       // Make the frequency vary by month and species to create interesting patterns
-      let frequency
+      let frequency = 0;
 
       // Create seasonal patterns
       if (speciesName === "Red Fox") {
         // More foxes in spring and fall
-        frequency = [3, 4, 5, 6, 4, 3, 2, 2, 3, 5, 6, 4][month]
+        frequency = [3, 4, 5, 6, 4, 3, 2, 2, 3, 5, 6, 4][month];
       } else if (speciesName === "Great Blue Heron") {
         // More herons in summer
-        frequency = [1, 2, 3, 4, 6, 8, 7, 5, 4, 3, 2, 1][month]
+        frequency = [1, 2, 3, 4, 6, 8, 7, 5, 4, 3, 2, 1][month];
       } else if (speciesName === "Bald Eagle") {
         // More eagles in winter
-        frequency = [7, 6, 4, 3, 2, 1, 1, 2, 3, 4, 5, 7][month]
+        frequency = [7, 6, 4, 3, 2, 1, 1, 2, 3, 4, 5, 7][month];
       } else if (speciesName === "Raccoon") {
         // More raccoons in late summer and fall
-        frequency = [2, 2, 3, 4, 5, 5, 6, 8, 7, 6, 4, 3][month]
+        frequency = [2, 2, 3, 4, 5, 5, 6, 8, 7, 6, 4, 3][month];
       } else if (speciesName === "Coyote") {
         // More coyotes in winter
-        frequency = [6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 6, 7][month]
+        frequency = [6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 6, 7][month];
       }
 
       // Add some randomness
-      frequency = Math.max(1, frequency + randomBetween(-1, 1))
+      frequency = Math.max(1, frequency + randomBetween(-1, 1));
 
       // Generate multiple sightings per species per month
       // Multiply frequency by 2-4 to ensure multiple sightings
-      const actualFrequency = frequency * randomBetween(2, 4)
+      const actualFrequency = frequency * randomBetween(2, 4);
 
       for (let i = 0; i < actualFrequency; i++) {
-        const date = randomDateInMonth(2023, month)
-        const locationIndex = randomBetween(0, locations.length - 1)
-        const notesArray = speciesNotes[speciesName]
-        const noteIndex = randomBetween(0, notesArray.length - 1)
+        const date = randomDateInMonth(2023, month);
+        const locationIndex = randomBetween(0, locations.length - 1);
+        const notesArray = speciesNotes[speciesName];
+        const noteIndex = randomBetween(0, notesArray.length - 1);
 
         observations.push({
           id: String(id++),
@@ -153,11 +159,10 @@ export function generateSampleData(): Observation[] {
           date: date,
           notes: notesArray[noteIndex],
           timestamp: date.toISOString(),
-        })
+        });
       }
-    })
+    });
   }
 
-  return observations
+  return observations;
 }
-

@@ -43,7 +43,8 @@ export function ObservationChart({ observations }: ObservationChartProps) {
   const uniqueSpecies = [...new Set(observations.map((obs) => obs.species))];
 
   // Initialize data structure
-  const monthlyData = monthNames.map((month) => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const monthlyData: Record<string, any>[] = monthNames.map((month) => ({
     name: month,
     total: 0,
     ...Object.fromEntries(uniqueSpecies.map((species) => [species, 0])),

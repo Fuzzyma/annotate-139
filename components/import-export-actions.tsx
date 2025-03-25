@@ -2,20 +2,12 @@
 
 import type React from "react";
 
-import { useState } from "react";
-import { Download, Upload, FileJson, FileSpreadsheet } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuSeparator,
-  DropdownMenuLabel,
-} from "@/components/ui/dropdown-menu";
-import { toast } from "sonner";
 import { exportAsJson, importFromJson } from "@/lib/import-export";
 import type { Observation } from "@/lib/types";
+import { Download, Upload } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 interface ImportExportActionsProps {
   observations: Observation[];
@@ -35,6 +27,7 @@ export function ImportExportActions({
         description: "Your observations have been exported as JSON.",
       });
     } catch (error) {
+      console.log(error);
       toast.error("Export failed", {
         description: "There was an error exporting your observations.",
       });
@@ -55,6 +48,7 @@ export function ImportExportActions({
         description: `${importedObservations.length} observations have been imported.`,
       });
     } catch (error) {
+      console.log(error);
       toast.error("Import failed", {
         description:
           "There was an error importing your observations. Please check the file format.",

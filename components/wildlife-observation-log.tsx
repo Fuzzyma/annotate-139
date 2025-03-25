@@ -1,40 +1,25 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import {
-  Plus,
-  Table,
-  Grid,
-  Search,
-  Image,
-  ChevronDown,
-  List,
-  BarChart,
-} from "lucide-react";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ObservationForm } from "./observation-form";
-import { ObservationList } from "./observation-list";
-import { ObservationTable } from "./observation-table";
-import { ObservationChart } from "./observation-chart";
-import { ObservationDetail } from "./observation-detail";
-import { PhotoGallery } from "./photo-gallery";
-import { ImportExportActions } from "./import-export-actions";
-import { generateSampleData } from "@/lib/sample-data";
-import type { Observation } from "@/lib/types";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { generateSampleData } from "@/lib/sample-data";
+import type { Observation } from "@/lib/types";
+import { Grid, Plus, Search, Table } from "lucide-react";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { ImportExportActions } from "./import-export-actions";
+import { ObservationChart } from "./observation-chart";
+import { ObservationDetail } from "./observation-detail";
+import { ObservationForm } from "./observation-form";
+import { ObservationList } from "./observation-list";
+import { ObservationTable } from "./observation-table";
+import { PhotoGallery } from "./photo-gallery";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 
 export function WildlifeObservationLog() {
@@ -49,9 +34,6 @@ export function WildlifeObservationLog() {
   const [isEditMode, setIsEditMode] = useState(false);
   const [deletedObservation, setDeletedObservation] =
     useState<Observation | null>(null);
-  const [activeTab, setActiveTab] = useState<
-    "observations" | "gallery" | "charts"
-  >("observations");
 
   useEffect(() => {
     // Load data from localStorage or use sample data
@@ -198,12 +180,6 @@ export function WildlifeObservationLog() {
         obs.notes.toLowerCase().includes(query)
       );
     });
-
-  const activeLabels = {
-    observations: "Observations",
-    gallery: "Photo Gallery",
-    charts: "Charts",
-  };
 
   return (
     <Tabs className="space-y-4 grow flex flex-col min-h-0">

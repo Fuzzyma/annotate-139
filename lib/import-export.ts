@@ -34,7 +34,7 @@ export async function importFromJson(file: File): Promise<Observation[]> {
         }
 
         // Convert dates from string to Date objects if needed
-        const observations = json.map((item: any) => ({
+        const observations = json.map((item) => ({
           ...item,
           date: new Date(item.date),
           id: item.id || crypto.randomUUID(), // Ensure each item has an ID
