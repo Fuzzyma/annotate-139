@@ -122,20 +122,15 @@ export function generateSampleData(): Observation[] {
 
       // Create seasonal patterns
       if (speciesName === "Red Fox") {
-        // More foxes in spring and fall
-        frequency = [3, 4, 5, 6, 4, 3, 2, 2, 3, 5, 6, 4][month];
+        frequency = [1, 2, 3, 4, 2, 1, 0, 0, 1, 3, 4, 3][month];
       } else if (speciesName === "Great Blue Heron") {
-        // More herons in summer
-        frequency = [1, 2, 3, 4, 6, 8, 7, 5, 4, 3, 2, 1][month];
+        frequency = [1, 2, 3, 4, 3, 3, 2, 4, 4, 3, 2, 1][month];
       } else if (speciesName === "Bald Eagle") {
-        // More eagles in winter
-        frequency = [7, 6, 4, 3, 2, 1, 1, 2, 3, 4, 5, 7][month];
+        frequency = [1, 3, 4, 3, 2, 1, 1, 2, 3, 4, 5, 2][month];
       } else if (speciesName === "Raccoon") {
-        // More raccoons in late summer and fall
-        frequency = [2, 2, 3, 4, 5, 5, 6, 8, 7, 6, 4, 3][month];
+        frequency = [2, 2, 3, 4, 2, 2, 4, 2, 1, 2, 4, 3][month];
       } else if (speciesName === "Coyote") {
-        // More coyotes in winter
-        frequency = [6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 6, 7][month];
+        frequency = [2, 5, 4, 3, 2, 1, 2, 3, 4, 2, 1, 3][month];
       }
 
       // Add some randomness
@@ -143,7 +138,7 @@ export function generateSampleData(): Observation[] {
 
       // Generate multiple sightings per species per month
       // Multiply frequency by 2-4 to ensure multiple sightings
-      const actualFrequency = frequency * randomBetween(2, 4);
+      const actualFrequency = frequency * randomBetween(0, 2);
 
       for (let i = 0; i < actualFrequency; i++) {
         const date = randomDateInMonth(2023, month);
