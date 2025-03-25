@@ -182,7 +182,10 @@ export function WildlifeObservationLog() {
     });
 
   return (
-    <Tabs className="space-y-4 grow flex flex-col min-h-0">
+    <Tabs
+      className="space-y-4 grow flex flex-col min-h-0"
+      defaultValue="observations"
+    >
       <div className="flex justify-between items-center gap-1 flex-col md:flex-row">
         <h1 className="text-xl font-bold text-center">
           Wildlife Observation Log
